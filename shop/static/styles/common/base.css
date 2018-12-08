@@ -1,0 +1,16 @@
+a {
+  color: #003569;
+}
+/*清除浮动*/
+.clearfix:after,
+.clearfix:before {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.clearfix {
+    display: block;
+    zoom: 1;
+}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}登录注册页{% endblock%}
+{% block css %}
+<link rel="stylesheet" href="/static/styles/pages/login.css">
+{% endblock%}
+{% block content %}
+
+        <main class="main login-main" role="main">
+            <article class="login-cont clearfix">
+                <div class="login-pic-box">
+                    <img src="../static/images/res/home.jpg">
+                </div>
+                <div class="login-wrapper">
+                    <div class="login-box">
+                        <form  method="post" id="regloginform">
+                            <h2 class="login-hd">
+                                注册零售管理系统
+                            </h2>
+                             <h2 class="login-hd">
+                                 {% if (msg | length ) == 0 %}
+                                 {%  else %}
+                                  <b>{{msg}}</b>
+                                 {% endif %}
+
+                            </h2>
+                            <div class="form-item">
+                                <input class="input-txt"  aria-label="用户名" aria-required="true" autocapitalize="off" autocorrect="off" maxlength="30" name="username" placeholder="用户名" value="" type="text" data-reactid=".0.1.0.1.0.1.0.5.0">
+                            </div>
+                            <div class="form-item">
+                                <input class="input-txt" aria-describedby="" aria-label="密码" aria-required="true" autocapitalize="off" autocorrect="off" name="password" placeholder="密码" type="password" value="" data-reactid=".0.1.0.1.0.1.0.6.0">
+                            </div>
+                            <div class="btn-wrapper">
+                                <button class="btn-primary" onclick="form=document.getElementById('regloginform');form.action='/reg/'">注册</button>
+                                <button class="btn-primary" onclick="form=document.getElementById('regloginform');form.action='/login/'">登录</button>
+                            </div>
+                            <p class="agreenment">
+                                <span>注册表示你同意我们的 </span>
+                                <a class="agreenment-link"  target="_blank">用户管理方法</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </article>
+        </main>
+{% endblock %}
