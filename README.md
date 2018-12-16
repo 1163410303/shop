@@ -1,2 +1,0 @@
-# shop
-flask+jquery+bootstrap
