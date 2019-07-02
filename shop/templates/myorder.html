@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap eCommerce</title>
+    <!-- Bootstrap -->
+    <link href="/static/styles/pages/bootstrap-4.0.0.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/shop">零售商城</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="/shop">首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/cart">购物车</a>
+            </li>
+              <li class="nav-item">
+              <a class="nav-link active" href="/myorder">我的订单</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">个人信息</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/logout">登出账户</a>
+                <a class="dropdown-item" href="/contact">修改个人信息</a>
+              </div>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="输入商品名或种类名">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+<div class="container">
+    <div class="table-responsive">
+      <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>订单编号</th>
+                    <th>商品名</th>
+                    <th>数量</th>
+                    <th>价格</th>
+                    <th>收货地址</th>
+                    <th>下单时间</th>
+                    <th>订单状态</th>
+                    <th>退货</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for order in orders%}
+                    <tr>
+                        <td>{{order.id}}</td>
+                        <td> {{order.good_name}}</td>
+                        <td> {{order.quantity}}</td>
+                        <td> {{order.price}}</td>
+                        <td> {{order.address}}</td>
+                        <td> {{order.date}}</td>
+                        <td> {{order.state}}</td>
+                        <td><button class="btn-danger" onclick="cancel_order({{ order.id }})">申请退货</button></td>
+                    </tr>
+            {% endfor %}
+            </tbody>
+      </table>
+    </div>
+</div>
+   <script src="/static/js/jquery-3.2.1.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap-4.0.0.js"></script>
+<script >
+function cancel_order(id) {
+    $.post(
+			'/cancel_order/',{
+				"id" : id
+				},
+			function (data){
+				if(data) {
+                    alert('订单已申请退货')
+                    window.location.reload()
+                }
+			});
+}
+</script>
+</body>
+</html>

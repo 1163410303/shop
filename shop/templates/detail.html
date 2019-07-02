@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Product Page Template</title>
+    <!-- Bootstrap -->
+    <link href="/static/styles/pages/bootstrap-4.0.0.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">零售商城</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/shop">首页 <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cart">购物车</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/myorder">我的订单</a>
+          </li>
+         <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="/contact" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">个人信息</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/logout">登出账户</a>
+                <a class="dropdown-item" href="/contact">修改个人信息</a>
+              </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Searh" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+        </form>
+      </div>
+    </nav>
+    <div class="container mt-2">
+{#      <div class="row">#}
+{#        <div class="col-12">#}
+{#          <div class="jumbotron">#}
+{#            <h1 class="text-center">{{ name }}</h1>#}
+{#<img src="{{ titleimg }}" alt="" class="img-fluid">#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="text-center col-md-6 col-12 col-xl-12">
+          <h3><b>预定商品</b></h3>
+		  <p>我们会在第一时间联系您,审核过后即可发货</p>
+		  <p><em><strong>请在确认订单前仔细审核您的个人信息是否正确，由于您的个人原因造成的订单失效我们概不负责</strong></em></p>
+		<form role="form" id="detail" method="post">
+  <div class="form-group">
+    <label class="sr-only" for="number">名称</label>
+    <input type="number" class="form-control" id="number" placeholder="请输入数量" name="quantity">
+  </div>
+  <button type="submit" class="btn btn-danger" onclick="form=document.getElementById('detail');form.action='/add_myorder/{{ gid }}'">确认订单</button>
+<button type="submit" class="btn btn-dark" onclick="form=document.getElementById('detail');form.action='/add_cart/{{ gid }}'">加入购物车</button>
+</form>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-4">
+  <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+<div class="card-body">
+  <h5 class="card-title"><em><strong>零售政策</strong></em></h5>
+  <p class="card-text">该商品预定数量若小于20件则按照零售价{{ retail_price }}元</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+<div class="card-body">
+  <h5 class="card-title"><em><strong>批发政策</strong></em></h5>
+  <p class="card-text">该商品预定数量大于20件则按照批发价{{ trade_price }}元</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 col-12 col-xl-12">
+          <h2>商品详情</h2>
+          <p>{{ content }}</p>
+            {%  for image in images %}
+            <div>
+                <img  class="d-block w-100" src="{{ image.url }}">
+            </div>
+            {% endfor %}
+        </div>
+</div>
+    </div>
+    <hr>
+<hr>
+<hr>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap-4.0.0.js"></script>
+  <script>
+      window.onload = function () {
+          if("{{ msg }}"=='添加成功'){
+              alert("添加成功")
+          }
+      }
+  </script>
+  </body>
+</html>
